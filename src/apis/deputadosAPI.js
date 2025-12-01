@@ -11,6 +11,7 @@ export default class DeputadosAPI{
         if (this.controler) this.controler.abort();
         this.controler = new AbortController();
         this.signal = this.controler.signal;
+        console.log(API_URL)
     }
 
     async getDeputados(itens=15, partido=null){
