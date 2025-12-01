@@ -1,0 +1,140 @@
+
+.card-prop {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  grid-column: span 7;
+  height: 280px;
+  border: 2px solid var(--color-theme1);
+  padding: 30px;
+  gap: 30px;
+
+}
+
+.card-prop-tittle {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.card-prop-last-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.view-more {
+  font-size: .7rem;
+  padding: 10px 20px;
+  border: 2px solid var(--color-theme1);
+  border-radius: 10px;
+  width: max-content;
+  height: max-content;
+  text-wrap: nowrap;
+  color: var(--color-theme3);
+  background-color: var(--color-theme1);
+  left: 30px;
+  bottom: 30px;
+  margin-left: auto;
+}
+
+.view-more:hover {
+  cursor: pointer;
+  border: 2px solid var(--color-theme3);
+}
+
+.prop-details-container {
+  height: auto;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(var(--grid-columns),var(--grid-width-columns));
+  column-gap: var(--grid-column-gap);
+  margin-top: 120px;
+}
+
+.prop-information-container {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / -1;
+  width: 100%;
+  gap: 30px;
+}
+
+.prop-related {
+    grid-column: 1 / -1;
+    margin-top: 120px;
+}
+
+.prop-related h2 {
+  margin-bottom: 30px;
+}
+
+
+.prop-nav-bar {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(var(--grid-columns),var(--grid-width-columns));
+  column-gap: var(--grid-column-gap);
+  margin-top: 120px;
+}
+
+.prop-category-bar {
+  cursor: pointer;
+  display: flex;
+  grid-column: 1;
+  gap: 30px;
+}
+
+.source-prop {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  grid-column: 14;
+  justify-self: end;
+  border-radius: 5px;
+}
+
+.source-prop input[type="text"] {
+  width: 200px;
+  height: 30px;
+  border: 1px solid var(--color-theme1);
+}
+
+.category-button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid var(--color-theme1);
+  border-radius: 20px;  
+}
+
+.category-button:hover, .category-button-selected{
+  color: var(--color-theme3);
+  background-color: var(--color-theme1);
+  border: 1px solid var(--color-theme3);
+}
+
+.category-button p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#category-button-leg:hover img{
+  content: url("../assets/LegislativasSelect.svg");
+}
+
+#category-button-req-comun:hover img {
+  content: url("../assets/ReqSelect.svg");
+}
+
+#category-button-docs:hover img{
+  content: url("../assets/DocumentsSelect.svg");
+}
+

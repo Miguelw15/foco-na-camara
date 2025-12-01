@@ -1,0 +1,108 @@
+
+
+.card-deputado-container {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    justify-content: space-between;
+    grid-column: 1 / -1;
+    border-radius: 20px;
+    background-color: var(--color-theme4);
+}
+
+.card-deputado {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.card-deputado-foto {
+    width: 70px;
+    height: 90px;
+}
+
+.card-deputado-apresentacao{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.deputado-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.deputado-apresentacao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    margin: 120px 0;
+}
+
+.deputado-apresentacao img {
+    width: 225px;
+    height: 300px;
+}
+
+.deputado-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 120px 0;
+    color: var(--color-theme3);
+    background-color: var(--color-theme1);
+    gap: 60px;
+}
+
+
+.deputado-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+}
+
+.deputado-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.deputado-contatos-container {
+    margin: 120px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+}
+
+.deputado-contatos {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+}
+
+.deputado-contato {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.deputado-midias-sociais {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
