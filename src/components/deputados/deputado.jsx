@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import style from "@/styles/deputados.module.css";
 import { useEffect, useState } from "react";
 import DeputadosAPI from "@/apis/deputadosAPI";
-import Loading from "../Loading";
+import Loading from "../loading";
 
 //Midias Sociais
 import FacebookIcon from "@/assets/Facebook.png";
