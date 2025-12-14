@@ -1,6 +1,6 @@
 import PartidosAPI from "../../apis/partidosAPI"
 import { useEffect,useState } from "react"
-import Loading from "../Loading";
+import Loading from "@/components/Loading";
 import CardPartido from "./card-partido";
 
 export default function Partidos(){

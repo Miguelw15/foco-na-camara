@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import DeputadosAPI from "@/apis/deputadosAPI"
-import Loading from "../Loading";
+import Loading from "@/components/Loading";
 import CardDeputado from "./card-deputado";
 
 export default function Deputados(){
