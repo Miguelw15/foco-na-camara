@@ -1,15 +1,14 @@
-import Loading from "./Loading";
+import Loading from "@/components/Loading";
 import { useState,useEffect } from "react";
-import Bandeira from "@/assets/bandeira.png";
 import style from "@/styles/principal.module.css";
 import { useNavigate } from "react-router-dom";
 import DeputadosAPI from "@/apis/deputadosAPI";
 import ProposicoesAPI from "@/apis/proposicoesAPI";
 import EventosAPI from "@/apis/eventosAPI";
-import { categoriasProposicoes } from "../../config";
-import CardEvento from "./eventos/card-evento";
-import CardDeputado from "./deputados/card-deputado";
-import CardProposicao from "./proposicoes/card-proposicao";
+import { categoriasProposicoes } from "@/../config";
+import CardEvento from "@/components/eventos/card-evento";
+import CardDeputado from "@/components/deputados/card-deputado";
+import CardProposicao from "@/components/proposicoes/card-proposicao";
 
 export default function Principal(){
     const navigate = useNavigate();
