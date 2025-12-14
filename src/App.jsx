@@ -2,8 +2,8 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import '@/styles/index.css'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import TopBar from '@/components/TopBar'
+import Footer from '@/components/BottomBar'
 import Principal from '@/components/Principal'
 import Proposicoes from '@/components/proposicoes/proposicoes'
 import Proposicao from '@/components/proposicoes/proposicao'
@@ -18,7 +18,7 @@ const root = document.getElementById("root");
 
 createRoot(root).render(
     <BrowserRouter>
-      <Header></Header>
+      <TopBar></TopBar>
       <Routes>
         <Route index element={<Principal />} />
         <Route path='/deputados' element={<Deputados/>} />

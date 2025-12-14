@@ -2,7 +2,7 @@ import Search from "@/components/Search";
 import { useLocation, useNavigate } from "react-router-dom";
 
 
-export default function Header(){
+export default function TopBar(){
         
     const navigate =  useNavigate();
     const location = useLocation();
