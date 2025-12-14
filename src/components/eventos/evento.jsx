@@ -2,7 +2,7 @@ import EventosAPI from "@/apis/eventosAPI";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import style from "@/styles/eventos.module.css";
-import Loading from "../loading";
+import Loading from "../Loading";
 import VideoIcon from "@/assets/Video.png";
 
 export default function Evento() {

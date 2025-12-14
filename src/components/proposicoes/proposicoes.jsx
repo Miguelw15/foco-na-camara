@@ -1,5 +1,5 @@
 import ProposicoesAPI from "../../apis/proposicoesAPI";
-import Loading from "../loading";
+import Loading from "../Loading";
 import { useEffect,useState } from "react";
 import CardProposicao from "./card-proposicao";
 import "../../styles/proposicoes.css";

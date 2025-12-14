@@ -1,4 +1,4 @@
-import Loading from "@/components/loading.jsx";
+import Loading from "@/components/Loading.jsx";
 import { useState,useEffect } from "react";
 import style from "@/styles/principal.module.css";
 import { useNavigate } from "react-router-dom";

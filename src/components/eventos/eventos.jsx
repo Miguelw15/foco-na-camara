@@ -2,7 +2,7 @@ import EventosAPI from "@/apis/eventosAPI"
 import { useEffect, useState } from "react";
 import CardEvento from "./card-evento";
 import style from "@/styles/eventos.module.css";
-import Loading from "../loading";
+import Loading from "../Loading";
 
 
 

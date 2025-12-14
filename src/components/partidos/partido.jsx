@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import PartidosAPI from "@/apis/partidosAPI";
 import { useEffect, useState } from "react";
-import Loading from "@/components/loading";
+import Loading from "@/components/Loading";
 import style from "@/styles/partidos.module.css";
 
 import SiglaIcon from "@/assets/Tag Window.svg";
