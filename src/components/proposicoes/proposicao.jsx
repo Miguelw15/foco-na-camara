@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import ProposicoesAPI from "../../apis/proposicoesAPI"
 import { useState, useEffect } from "react";
-import Loading from "../loading";
+import Loading from "../Loading";
 import CardProposicao from "./card-proposicao";
 
 export default function Proposicao(){

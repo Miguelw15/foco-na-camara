@@ -1,5 +1,5 @@
 import ProposicoesAPI from "../../apis/proposicoesAPI";
-import Loading from "../loading";
+import Loading from "../Loading";
 import { useEffect,useState } from "react";
 import CardProposicao from "./card-proposicao";
 import "../../styles/proposicoes.css";
@@ -12,13 +12,13 @@ import legis from "../../assets/Legislativas.svg";
 import legisSelect from "../../assets/LegislativasSelect.svg";
 import req from "../../assets/Req.svg";
 import reqSelect from "../../assets/ReqSelect.svg";
-
+import SourcePropCard from "./sourcePropCards";
 
 
 export default function Proposicoes({numeroDeVotacoes=6}){
 
-  const [props,setData] = useState([]);
-  const [currentCategory,setCurrentCategory] = useState(categoriasProposicoes.legislativas);
+  const [props,setProps] = useState([]);
+  const [currentCategory, setCurrentCategory] = useState(categoriasProposicoes.legislativas);
   const propAPI = new ProposicoesAPI();
   const [hasGenerate,setHasGenerate] = useState(false);
 
@@ -46,16 +46,14 @@ export default function Proposicoes({numeroDeVotacoes=6}){
     if (defaultCategory) activeCategory(defaultCategory);
   },[])
 
+
   useEffect(()=>{   
 
     let active = true;
     setHasGenerate(false)
     async function loadData() {
-      try {
         const getProps = await propAPI.getPropsInDate(numeroDeVotacoes,currentCategory);   
         
-        if (!getProps) throw new Error('Erro na requisição das proposições')
-
         const fullProps =  await Promise.all(
           getProps.map(async element=>{
               const details = await propAPI.getProp(element.dados.id);
@@ -63,15 +61,10 @@ export default function Proposicoes({numeroDeVotacoes=6}){
           })
         )
         if (active){
-          setData(fullProps);
+          setProps(fullProps);
           setHasGenerate(true)
         };
 
-      }
-      catch(error){
-        console.error(error.message)
-      }
-        
     }
     loadData();
     return ()=>{
@@ -113,10 +106,6 @@ export default function Proposicoes({numeroDeVotacoes=6}){
             <img src={doc} alt="Outros Documentos"/>
             <p>Outros Documentos</p>
           </div>
-        </div>
-        <div className="source-prop">
-          <p>PROCURAR:</p>
-          <input type="text"/>
         </div>
       </div>
        {Array.isArray(props) && props.length > 0 && hasGenerate ? (

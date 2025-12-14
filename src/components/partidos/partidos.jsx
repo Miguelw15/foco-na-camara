@@ -1,6 +1,6 @@
 import PartidosAPI from "../../apis/partidosAPI"
 import { useEffect,useState } from "react"
-import Loading from "../loading";
+import Loading from "../Loading";
 import CardPartido from "./card-partido";
 
 export default function Partidos(){
@@ -10,10 +10,7 @@ export default function Partidos(){
     useEffect(()=>{
         async function loadPartidos(){
             const response = await partidosAPI.getPartidos();
-
-            const partidosRes = response;
-
-            setPartidos(partidosRes);
+            setPartidos(response);
         }
         loadPartidos();
     },[])
@@ -21,7 +18,7 @@ export default function Partidos(){
     return (
         <>
             {Array.isArray(partidos) && partidos.length > 0 ? (
-                <div className="card-container">
+                <div className="card-container margin-top">
                    {partidos.map((element,index)=> (
                         <CardPartido key={`${element.id}-${index}`} data={element}/>
                     )) }

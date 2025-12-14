@@ -7,7 +7,7 @@
     background-color: var(--color-theme4);
     grid-column: 1 / -1;
     padding: 30px;
-    border-radius: 20px;
+    border-radius: 50px;
 }
 
 .card-partido {
@@ -27,6 +27,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 120px;
 }
 
 .partido-descricao-container {
@@ -48,4 +49,34 @@
 
 .background-gray {
     background-color: var(--color-theme4);
+}
+
+.partido-logo-container {
+    margin: 60px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.partido-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    border-radius: 50px;      
+    width: 100px;
+    height: 100px;
+    background-color: var(--color-theme5);
+    color: var(--color-theme4);
+    font-weight: bold;
+}
+
+.partido-membros-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin-top: 120px;
+    grid-template-columns: repeat(var(--grid-columns),var(--grid-width-columns));
+    column-gap: var(--grid-column-gap);
+    row-gap: 30px;
+    grid-column: 1 / -1;
 }

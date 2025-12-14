@@ -23,26 +23,6 @@
   margin-top: auto;
 }
 
-.view-more {
-  font-size: .7rem;
-  padding: 10px 20px;
-  border: 2px solid var(--color-theme1);
-  border-radius: 10px;
-  width: max-content;
-  height: max-content;
-  text-wrap: nowrap;
-  color: var(--color-theme3);
-  background-color: var(--color-theme1);
-  left: 30px;
-  bottom: 30px;
-  margin-left: auto;
-}
-
-.view-more:hover {
-  cursor: pointer;
-  border: 2px solid var(--color-theme3);
-}
-
 .prop-details-container {
   height: auto;
   width: 100%;
@@ -73,13 +53,12 @@
 
 
 .prop-nav-bar {
-  width: 100%;
   display: grid;
   align-items: center;
   justify-content: center;
   grid-template-columns: repeat(var(--grid-columns),var(--grid-width-columns));
   column-gap: var(--grid-column-gap);
-  margin-top: 120px;
+  margin: 120px 0 60px;
 }
 
 .prop-category-bar {

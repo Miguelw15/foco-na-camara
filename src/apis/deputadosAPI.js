@@ -11,7 +11,6 @@ export default class DeputadosAPI{
         if (this.controler) this.controler.abort();
         this.controler = new AbortController();
         this.signal = this.controler.signal;
-        console.log(API_URL)
     }
 
     async getDeputados(itens=15, partido=null){
@@ -33,11 +32,7 @@ export default class DeputadosAPI{
     async getDeputado(id){
         try {
 
-            this._setupController();
-
-            console.log(id)
-
-            const response = await fetch(`${API_URL}/deputados/${id}`,{signal:this.signal});
+            const response = await fetch(`${API_URL}/deputados/${id}`);
             if (!response.ok) throw new Error('Erro na requisição do deputado');
 
             const data = await response.json();

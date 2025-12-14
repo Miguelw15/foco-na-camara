@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import DeputadosAPI from "@/apis/deputadosAPI"
-import Loading from "../loading";
+import Loading from "../Loading";
 import CardDeputado from "./card-deputado";
 
 export default function Deputados(){
@@ -21,15 +21,15 @@ export default function Deputados(){
     return (
             <> 
                 
-                { data ?
+                { data.length > 0 ?
                 
-                <div className="card-container">
+                <div className="card-container margin-top">
                     {data.map((e)=>(
                         <CardDeputado key={e.id} data={e}/>
                     ))}
                 </div>
                     
-                :<Loading/>}
+                : <Loading/>}
             </>
         )
     };

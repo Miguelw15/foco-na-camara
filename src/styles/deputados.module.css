@@ -6,7 +6,7 @@
     padding: 30px;
     justify-content: space-between;
     grid-column: 1 / -1;
-    border-radius: 20px;
+    border-radius: 50px;
     background-color: var(--color-theme4);
 }
 
@@ -14,11 +14,13 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    
 }
 
 .card-deputado-foto {
     width: 70px;
     height: 90px;
+    border-radius: 20px;
 }
 
 .card-deputado-apresentacao{
@@ -40,7 +42,7 @@
     justify-content: center;
     flex-direction: column;
     gap: 30px;
-    margin: 120px 0;
+    margin: 180px;
 }
 
 .deputado-apresentacao img {

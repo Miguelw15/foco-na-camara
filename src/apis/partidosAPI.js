@@ -10,10 +10,11 @@ export default class PartidosAPI{
         if (this.controller) {
             this.controller.abort();
         }
-        console.log(API_URL);
         this.controller = new AbortController();
         this.signal = this.controller.signal;
     }
+
+   
 
     async getPartidos(){
         try {
