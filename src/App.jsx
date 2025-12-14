@@ -2,17 +2,17 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import '@/styles/index.css'
-import TopBar from '@/components/TopBar'
-import Footer from '@/components/BottomBar'
-import Principal from '@/components/Principal'
-import Proposicoes from '@/components/proposicoes/proposicoes'
-import Proposicao from '@/components/proposicoes/proposicao'
-import Partidos from '@/components/partidos/partidos'
-import Partido from '@/components/partidos/partido'
-import Deputados from '@/components/deputados/deputados'
-import Deputado from '@/components/deputados/deputado'
-import Eventos from '@/components/eventos/eventos'
-import Evento from '@/components/eventos/evento'
+import TopBar from '@/components/TopBar.jsx'
+import BottomBar from '@/components/BottomBar.jsx'
+import Principal from '@/components/Principal.jsx'
+import Proposicoes from '@/components/proposicoes/proposicoes.jsx'
+import Proposicao from '@/components/proposicoes/proposicao.jsx'
+import Partidos from '@/components/partidos/partidos.jsx'
+import Partido from '@/components/partidos/partido.jsx'
+import Deputados from '@/components/deputados/deputados.jsx'
+import Deputado from '@/components/deputados/deputado.jsx'
+import Eventos from '@/components/eventos/eventos.jsx'
+import Evento from '@/components/eventos/evento.jsx'
 
 const root = document.getElementById("root");
 
@@ -30,6 +30,6 @@ createRoot(root).render(
         <Route path='/eventos' element={<Eventos/>}/>
         <Route path='/eventos/:id' element={<Evento/>}/>
       </Routes>
-      <Footer></Footer>
+      <BottomBar></BottomBar>
     </BrowserRouter>
 );
