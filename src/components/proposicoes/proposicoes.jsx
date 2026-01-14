@@ -1,10 +1,9 @@
-import ProposicoesAPI from "../../apis/proposicoesAPI";
+import ProposicoesAPI from "../../apis/proposicoesAPI.js";
 import Loading from "@/components/Loading";
-import { useEffect,useState } from "react";
+import { useEffect,useRef,useState } from "react";
 import CardProposicao from "./card-proposicao";
 import "../../styles/proposicoes.css";
-import { categoriasProposicoes } from "../../../config";
-
+import { categoriasProposicoes } from "../../../config.js";
 
 import doc from "../../assets/Documents.svg";
 import docSelect from "../../assets/DocumentsSelect.svg";
@@ -13,6 +12,8 @@ import legisSelect from "../../assets/LegislativasSelect.svg";
 import req from "../../assets/Req.svg";
 import reqSelect from "../../assets/ReqSelect.svg";
 import SourcePropCard from "./sourcePropCards";
+import { useSearchParams } from "react-router-dom";
+import NotFound from "../NotFound.jsx";
 
 
 export default function Proposicoes({numeroDeVotacoes=6}){
@@ -21,86 +22,86 @@ export default function Proposicoes({numeroDeVotacoes=6}){
   const [currentCategory, setCurrentCategory] = useState(categoriasProposicoes.legislativas);
   const propAPI = new ProposicoesAPI();
   const [hasGenerate,setHasGenerate] = useState(false);
-
-  function activeCategory(element){
-    document.querySelectorAll(".category-button")
-    .forEach(btn => {
-    btn.classList.remove("category-button-selected");
-
-    const img = btn.querySelector("img");
-    if (btn.id === "category-button-leg") img.src = legis;
-    if (btn.id === "category-button-req-comun") img.src = req;
-    if (btn.id === "category-button-docs") img.src = doc;
-    });
-
-    element.classList.add("category-button-selected");
-
-    const img = element.querySelector("img");
-    if (element.id === "category-button-leg") img.src = legisSelect;
-    if (element.id === "category-button-req-comun") img.src = reqSelect;
-    if (element.id === "category-button-docs") img.src = docSelect;
-  }
+  const [params] = useSearchParams();
+  const search = params.get("search");
+  
+  //buttons
+  const leg_button = useRef(null);
+  const req_button = useRef(null);
+  const docs_button = useRef(null);
 
   useEffect(()=>{
-    const defaultCategory = document.getElementById('category-button-leg');
-    if (defaultCategory) activeCategory(defaultCategory);
-  },[])
-
-
-  useEffect(()=>{   
 
     let active = true;
-    setHasGenerate(false)
-    async function loadData() {
-        const getProps = await propAPI.getPropsInDate(numeroDeVotacoes,currentCategory);   
-        
-        const fullProps =  await Promise.all(
-          getProps.map(async element=>{
-              const details = await propAPI.getProp(element.dados.id);
-              return details.dados;
-          })
-        )
-        if (active){
-          setProps(fullProps);
-          setHasGenerate(true)
-        };
+    
+    async function load() {
+      setHasGenerate(false);
+      const baseProps = search
+        ? await propAPI.getPropsFromKeyword(search)
+        : await propAPI.getPropsInDate(numeroDeVotacoes, currentCategory);
 
+
+      const fullProps = await Promise.all(
+        baseProps.map(p =>
+          propAPI.getProp(p.id ?? p.dados.id).then(r => r.dados)
+        )
+      );
+
+
+      if (active) {
+        setProps(fullProps);
+        setHasGenerate(true);
+      }
     }
-    loadData();
-    return ()=>{
-      active=false;
+
+    load();
+
+    
+    if (!search){
+      leg_button.current.classList.remove("selected");
+      docs_button.current.classList.remove("selected");
+      req_button.current.classList.remove("selected");
+    
+    switch (currentCategory) {
+      case categoriasProposicoes.legislativas:
+        leg_button.current.classList.add("selected");
+        break
+      case categoriasProposicoes.outrosDocumentos:
+          docs_button.current.classList.add("selected");
+        break
+      case categoriasProposicoes.requerimentosComunicacao:
+          req_button.current.classList.add("selected");
+        break
     }
-  },[currentCategory])
+    }
+    return () => (active = false);
+
+  },[search,currentCategory])
 
   return (
     <>
-      
+      { !search ? <>
       <div className="prop-nav-bar">
         <div className="prop-category-bar">
-          <div className="category-button" id="category-button-leg" onClick={(e)=>{
+          <div ref={leg_button} className="category-button" id="category-button-leg" onClick={(e)=>{
               if (currentCategory != categoriasProposicoes.legislativas) {
                 setCurrentCategory(categoriasProposicoes.legislativas)
-                activeCategory(e.currentTarget)
               }
             }}>
             <img src={legis} alt="Proposições Legislativas"/>
             <p>Proposições Legislativas</p>
           </div>
-          <div className="category-button" id="category-button-req-comun" onClick={(e)=>{
+          <div ref={req_button} className="category-button" id="category-button-req-comun" onClick={(e)=>{
               if (currentCategory != categoriasProposicoes.requerimentosComunicacao) {
                 setCurrentCategory(categoriasProposicoes.requerimentosComunicacao)
-                activeCategory(e.currentTarget)
-
               }
             }}>
             <img src={req} alt="Requerimentos/Comunicação" />
             <p>Requerimentos/Comunicação</p>
           </div>
-          <div className="category-button" id="category-button-docs" onClick={(e)=>{
+          <div ref={docs_button} className="category-button" id="category-button-docs" onClick={(e)=>{
             if (currentCategory != categoriasProposicoes.outrosDocumentos) {
               setCurrentCategory(categoriasProposicoes.outrosDocumentos)
-              activeCategory(e.currentTarget)
-
             }
           }}>
             <img src={doc} alt="Outros Documentos"/>
@@ -108,17 +109,41 @@ export default function Proposicoes({numeroDeVotacoes=6}){
           </div>
         </div>
       </div>
-       {Array.isArray(props) && props.length > 0 && hasGenerate ? (
+      {Array.isArray(props) && props.length > 0 && hasGenerate ? (
         <>
-          <div className="card-container">
+          <div className="card-container grid">
             {props.map((element, index) => (
               <CardProposicao key={`${element.id}-${index}`} data={element} />
             ))}
           </div>
+          
         </>
         ) : 
           <Loading />
         }
+      </>
+      : 
+      <>
+        {Array.isArray(props) && hasGenerate ? (
+          <>
+            { props.length == 0 ? 
+            <NotFound/>
+            :
+            <div className="card-container grid">
+              {props.map((element, index) => (
+                <CardProposicao key={`${element.id}-${index}`} data={element} />
+              ))}
+            </div>
+            } 
+            
+          </>
+          ) : 
+            <Loading />
+          }
+        </>
+       
+      }
+       
 
         
     </>

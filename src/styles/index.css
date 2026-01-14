@@ -6,6 +6,8 @@
   --color-theme3: #ffffff;
   --color-theme4: #F8F8F8;
   --color-theme5: #3a3939;
+  --color-theme6: #ececec;
+  --color-theme7: #22222257;
   --font-size: 16px;  
   --grid-columns: 14;
   --grid-width-columns: 30px;
@@ -34,6 +36,7 @@ html, * {
 }
 
 body {
+  
   width: 100%;
   height: 100vh;
   overflow-x: hidden;
@@ -44,7 +47,10 @@ body {
 }
 
 #root {
-  height: 100%;
+  display: grid;
+  height: 100%;  
+  grid-template-rows: auto 1fr auto;
+
 }
 
 @keyframes loading {
@@ -54,12 +60,24 @@ body {
 
 .loading {
   width: 100%;
-  height:100%;
+  height:100vh;
   display: flex;
   gap: 15px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  grid-column: 1/-1;
+}
+
+.not-found {
+  width: 100%;
+  height:100vh;
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  grid-column: 1/-1;
 }
 
 .loading-bar {
@@ -73,6 +91,7 @@ body {
 }
 
 header {
+  overflow: visible;
   display: grid;
   align-items: center;
   justify-content: center;
@@ -81,12 +100,17 @@ header {
   height: 70px;
   width: 100%;
   background-color: var(--color-theme1);
+  box-sizing: border-box;
 }
 
 header nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   grid-column: 1;
   height: 100%;
   width: max-content;
+  
 }
 
 header nav button{
@@ -103,38 +127,11 @@ header nav button:hover {
   color: var(--color-theme1);
 }
 
-header div {
-  display: flex;
-  grid-column: 14;
-  justify-self: end;
-  border-radius: 5px;
-}
-
-header div input[type="text"]{
-  width: 200px;
-  max-height: 32px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  padding: 5px;
-  background-color: var(--color-theme3);
-}
-
-header div input[type="submit"]{
-  background-color: var(--color-theme2);
-  color: var(--color-theme3);
-  max-height: 32px;
-  padding: 8px 16px;
-  border-radius: 0 5px 5px 0;
-}
-
-header div input[type="submit"]:hover {
-  filter: brightness(85%);
-}
-
 .current-page {
   background-color: var(--color-theme3);
   color: var(--color-theme1);
 }
+
 
 footer {
   display: flex;
@@ -155,16 +152,16 @@ footer p {
 }
 
 .card-container {
-
+  width: 100%;
   display: grid;
   align-items: center;
   justify-content: center;
   grid-template-columns: repeat(var(--grid-columns),var(--grid-width-columns));
   column-gap: var(--grid-column-gap);
   row-gap: 60px;
-  width: 100%;
   grid-column: 1 / -1;
 }
+
 
 
 .view-more {
@@ -185,12 +182,112 @@ footer p {
   border: 2px solid var(--color-theme3);
 }
 
-@media (max-width:800px) {
-  
-  
+
+.search-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  grid-column: auto/-1;
+  align-items: end;
 }
 
+.search-options-overlay {
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.438);
+  inset: 0;
+  z-index: 1;
+}
+
+.search-options-overlay.open {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+
+.search-options {
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 290px;
+  top: 40px;
+  left: auto;
+  height: max-content;
+  
+  position: absolute;
+
+  background-color: var(--color-theme6);
+  z-index: 10;
+  border-radius: 10px;
+}
+
+.search-options.open {
+  display: flex;
+}
+
+.search-option {
+  box-sizing: border-box;
+  padding: 15px 15px;
+  width: 100%;
+  text-align: start;
+}
+
+.search-option span {
+  text-decoration: underline;
+}
+
+.search-option:hover {
+  cursor: pointer;
+  background-color: var(--color-theme7);
+}
+
+.search {
+  display: flex;
+}
+
+.search-submit{
+  background-color: var(--color-theme2);
+  color: var(--color-theme3);
+  height: max-content;
+  width: max-content;
+  padding: 8px 16px;
+  border-radius: 0 5px 5px 0;
+}
+
+.search-text{
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  padding: 5px;
+  background-color: var(--color-theme3);
+}
+
+.search-submit:hover {
+  filter: brightness(85%);
+
+}
+.search-submit-icon {
+  display: none;
+  background-color: var(--color-theme2);
+  padding: 5px;
+  border-radius: 0 5px 5px 0;
+}
+
+.search-submit-icon:hover {
+  cursor: pointer;
+  filter: brightness(85%);
+}
+
+.search-submit-icon img {
+  width: 25px;
+  height: 25px;
+}
+
+
 .grid {
+  margin: 60px 0;
   display: grid;
   align-items: center;
   justify-content: center;
@@ -198,6 +295,153 @@ footer p {
   column-gap: var(--grid-column-gap);
 }
 
-.margin-top {
-  margin-top: 120px;
+
+
+.menu {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: none;
+  cursor: pointer;
+}
+
+.menu img {
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+}
+
+.hidden-menu-overlay  {  
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+
+  transition: 
+  opacity 0.2s ease,
+  visibility 0s linear 0.2s;
+
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.438);
+  z-index: 1;
+  
+}
+
+.hidden-menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+
+} 
+
+.hidden-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform .2s linear;
+  width: 300px;
+  height: 100%;
+  margin-top: 70px;
+  background-color: var(--color-theme1);
+}
+
+.hidden-menu.open {
+  transition: transform .2s linear;
+  transform: scaleX(1);
+}
+
+.hidden-menu button {
+  padding: 10px 20px;
+  height: 50px;
+  width: 100%;
+  font-weight: 500;
+  background-color: var(--color-theme1);
+  color: var(--color-theme4);
+}
+
+.hidden-menu button:hover {
+  background-color: var(--color-theme5);
+  color: var(--color-theme3);
+}
+
+.hidden-menu button.current-page {
+  background-color: var(--color-theme5);
+  color: var(--color-theme3);
+}
+
+
+
+@media (max-width:850px) {
+
+  :root {
+    --grid-columns: 8;
+  }
+
+  .grid {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    padding: 0 30px 0 ;
+  }
+
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    box-sizing: border-box;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    column-gap: 0;
+    padding: 0 0 0 30px;
+  }
+  
+  .search-container {
+    position: absolute;
+    right: 30px;
+  }
+
+  .search-text {
+    width: 15dvw;
+  }
+
+  .search-submit {
+    display: none;
+  }
+
+  .search-submit-icon {
+    display: flex;
+  }
+  
+  
+}
+
+@media (max-width:700px) {
+
+  .menu {
+    display: flex;
+  }
+
+  .search-text {
+    width: 30dvw;
+  }
+
+  header nav {
+    display: none;
+  }
+
+}
+
+@media (max-width:600px) {
+  .card-container {
+    align-items: center;
+    justify-content: start;
+
+  }
+  
 }

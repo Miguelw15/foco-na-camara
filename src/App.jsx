@@ -11,8 +11,8 @@ import Partidos from '@/components/partidos/partidos.jsx'
 import Partido from '@/components/partidos/partido.jsx'
 import Deputados from '@/components/deputados/deputados.jsx'
 import Deputado from '@/components/deputados/deputado.jsx'
-import Eventos from '@/components/eventos/eventos.jsx'
-import Evento from '@/components/eventos/evento.jsx'
+//import Eventos from '@/components/eventos/eventos.jsx'
+//import Evento from '@/components/eventos/evento.jsx'
 
 const root = document.getElementById("root");
 
@@ -27,8 +27,8 @@ createRoot(root).render(
         <Route path='/proposicoes/:id' element={<Proposicao/>} />
         <Route path='/partidos' element={<Partidos/>} />
         <Route path='/partidos/:id' element={<Partido/>}/>
-        <Route path='/eventos' element={<Eventos/>}/>
-        <Route path='/eventos/:id' element={<Evento/>}/>
+        {/*<Route path='/eventos' element={<Eventos/>}/>
+        <Route path='/eventos/:id' element={<Evento/>}/>*/}
       </Routes>
       <BottomBar></BottomBar>
     </BrowserRouter>

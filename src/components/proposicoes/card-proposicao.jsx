@@ -11,7 +11,7 @@ export default function CardProposicao({data}) {
                 </div>
 
                 <div className="card-prop-ementa">
-                    <LinesEllipsis text={data?.ementa} maxLine="5"/>
+                    <LinesEllipsis text={data?.ementa} maxLine="3"/>
                 </div>
 
                 <div className="card-prop-data">

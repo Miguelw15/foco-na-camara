@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import PartidosAPI from "@/apis/partidosAPI";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Loading from "@/components/Loading";
 import style from "@/styles/partidos.module.css";
 
@@ -11,7 +11,7 @@ import MembersInPossessionIcon from "@/assets/People.svg";
 import TotalMembres from "@/assets/Management.svg";
 import LogoPartido from "./logo-partido";
 import DeputadosAPI from "@/apis/deputadosAPI";
-import CardDeputado from "../deputados/card-deputado";
+import CardDeputado from "@/components/deputados/card-deputado";
 
 export default function Partido(){
     const {id} = useParams();
@@ -19,6 +19,7 @@ export default function Partido(){
     const deputadosAPI = new DeputadosAPI();
     const [partidoData,setPartidoData] = useState();
     const [membros, setMembros] = useState();
+    const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(()=>{
         async function loadData(){
@@ -30,8 +31,14 @@ export default function Partido(){
 
     useEffect(()=>{
         async function loadData(){
-            const data = await deputadosAPI.getDeputados(15,partidoData.sigla);
-            setMembros(data);
+            
+            const deputados = await deputadosAPI.getDeputados({partido: partidoData.sigla});
+            const result = [];
+            for (let i = 0; i < deputados.length; i+10 ){
+                result.push(deputados.slice(i,i+=10));
+            }
+            
+            setMembros(result);
         }
 
         if (partidoData?.sigla) {
@@ -39,6 +46,7 @@ export default function Partido(){
         }
 
     },[partidoData])
+
 
     return (
         <>
@@ -85,12 +93,23 @@ export default function Partido(){
                     </div>
                 </div>
 
-                <div className={style['partido-membros-container']}>
-                    <h2>Membros:</h2>
+                <div className='grid' style={{rowGap:"30px"}}>
+                    <div className={style["members-container"]}>
+                        <h2>Membros:</h2> 
+                        <div className={style["members-page"]}>
+                            <span>Paginas:</span>
+                            <div style={{display:"flex",gap: "10px"}}>
+                                {membros.map((_,i)=>{
+                                    return <div key={i} style={{cursor:"pointer",width: "max-content"}} onMouseDown={(_)=>{console.log( "clicou",currentPage); setCurrentPage(i)}}>{currentPage == i ? <strong>{`[${i+1}]`}</strong> : i+1}</div>
+                                })}
+                            </div>
+                            
+                        </div>
+                    </div>
                     <div className="card-container">
                         
-                    {membros.map((e)=>(
-                           <CardDeputado data={e}/> 
+                    {membros[currentPage].map((e,i)=>(
+                           <CardDeputado key={i} data={e}/> 
                     ))}
 
                     </div>

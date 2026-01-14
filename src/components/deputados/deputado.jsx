@@ -18,7 +18,6 @@ export default function Deputado(){
     useEffect(()=>{
         async function loadData(){
             const newData = await deputadosAPI.getDeputado(id);
-
             setData(newData)
         }
         loadData()
@@ -79,10 +78,10 @@ export default function Deputado(){
                             data.redeSocial && data.redeSocial.length > 0 ?                                 
                             <div className={style['deputado-midias-sociais']}>
 
-                            {data.redeSocial.map((e)=>{
+                            {data.redeSocial.map((e,i)=>{
                                 return (
 
-                                    <div className={style['deputado-midia-social']}>
+                                    <div key={i} className={style['deputado-midia-social']}>
                                         <a href={e}>
                                             {
                                                 e.includes('twitter') ?

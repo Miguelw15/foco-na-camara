@@ -1,9 +1,7 @@
-import { API_URL } from "../../config";
+import { API_URL } from "@/../config.js";
+
 
 export default class ProposicoesAPI{
-    constructor(){
-
-    }
 
     __setupController(){
         if (this.controller) {
@@ -12,7 +10,19 @@ export default class ProposicoesAPI{
         this.controller = new AbortController();
         this.signal = this.controller.signal;
     }
+    async getPropsFromKeyword(keyword) {
+        try {
+            this.__setupController();
+            const getProps = await fetch(`${API_URL}/proposicoes?keywords=${keyword}`);
+            if (!getProps.ok) throw new Error("Erro na requisição de proposições com palavra chave");
 
+            const props = await getProps.json();
+            return props.dados;
+        }
+        catch(error) {
+            console.error(error.message);
+        }
+    }
     async getPropsRelated(idProposicao, qtd=10){
         try {
             this.__setupController();

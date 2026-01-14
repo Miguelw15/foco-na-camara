@@ -19,10 +19,11 @@ export default function Eventos(){
         loadData()
     },[])
 
-return (
+
+    return (
      
      <>
-     {eventos?
+     {Array.isArray(eventos) && eventos.length > 0?
         <div className={style['card-evento-container']}>
             {eventos.map((e)=>(
                 <CardEvento key={e.id} data={e} />

@@ -23,7 +23,7 @@ export default function Principal(){
     useEffect(()=>{
 
         async function loadData(){
-            const deps = await deputadosAPI.getDeputados(3);
+            const deps = await deputadosAPI.getDeputados({ itens:4});
             const props = await proposicoesAPI.getPropsInDate(4, categoriasProposicoes.legislativas); 
             const evs = await eventosAPI.getEventos(3);
 
@@ -41,7 +41,7 @@ export default function Principal(){
         }
         loadData();
     },[])
-    console.log(proposicoes)
+    
     return (
         <>
         <div className={style["principal-container"]}>
@@ -55,14 +55,14 @@ export default function Principal(){
                     </p>
                     <div className={style["principal-apresentacao-buttons"]}>
                         <div className={style["principal-apresentacao-button"]} onClick={()=>{navigate("/proposicoes")}}>Ver Proposicoes</div>
-                        <div className={style["principal-apresentacao-button"]} onClick={()=>{navigate("/deputados")}}>Ver Deputados</div>
+                        <div className={style["principal-apresentacao-button-deputados"]} onClick={()=>{navigate("/deputados")}}>Ver Deputados</div>
                     </div>
                 </div>
             </div>
 
-            {deputados && eventos && proposicoes ? ( 
+            {deputados && /*eventos &&*/ proposicoes ? ( 
             <>
-
+            {/*
             <div className={`${style["principal-secao"]} grid`}>
                 <h4>Eventos em alta:</h4>
 
@@ -72,12 +72,13 @@ export default function Principal(){
                     ))} 
                 </div>
             </div>
+            */}
             <div className={`${style["principal-secao"]} grid`}>
                 <h4>Deputados em alta:</h4>
 
                 <div className="card-container">
-                    {deputados.map((e)=>(
-                        <CardDeputado data={e} />
+                    {deputados.map((e,i)=>(
+                        <CardDeputado key={i} data={e} />
                     ))}
                 </div>
             </div>
@@ -85,8 +86,8 @@ export default function Principal(){
                 <h4>Proposições em alta:</h4>
 
                 <div className="card-container">
-                    {proposicoes.map((e)=>(
-                        <CardProposicao data={e} />
+                    {proposicoes.map((e,i)=>(
+                        <CardProposicao key={i} data={e} />
                     ))}
                 </div>
             </div>

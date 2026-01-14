@@ -1,22 +1,11 @@
-import { API_URL } from "@/../config";
+import { API_URL } from "@/../config.js";
 
 
 export default class DeputadosAPI{
-    constructor(){
-        this.controler = null;
-        this.signal = null;
-    }
 
-    _setupController(){
-        if (this.controler) this.controler.abort();
-        this.controler = new AbortController();
-        this.signal = this.controler.signal;
-    }
-
-    async getDeputados(itens=15, partido=null){
+    async getDeputados({itens=null,nome=null, partido=null}){
         try {
-            this._setupController();
-            const response = await fetch(`${API_URL}/deputados?itens=${itens}&${partido?`siglaPartido=${partido}`:''}`,{signal:this.signal})
+            const response = await fetch(`${API_URL}/deputados?${itens? `itens=${itens}`: ""}${nome? `&nome=${nome}` : ""}${partido?`&siglaPartido=${partido}`:''}`)
             if (!response.ok) throw new Error('Erro na requisição dos deputados');
 
             const data = await response.json();
@@ -40,7 +29,7 @@ export default class DeputadosAPI{
             return data.dados;
         }
         catch(error){
-            console.error(error.message);
+            console.error(error);
         }
     }
 

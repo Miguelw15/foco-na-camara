@@ -4,12 +4,15 @@
   flex-direction: column;
   gap: 15px;
   grid-column: span 7;
-  height: 280px;
+  width: 100%;
+  box-sizing: border-box;
+  height: 330px;
   border: 2px solid var(--color-theme1);
   padding: 30px;
   gap: 30px;
 
 }
+
 
 .card-prop-tittle {
   font-size: 1.2rem;
@@ -51,6 +54,21 @@
   margin-bottom: 30px;
 }
 
+.prop-information {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.prop-information a {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 
 .prop-nav-bar {
   display: grid;
@@ -58,7 +76,7 @@
   justify-content: center;
   grid-template-columns: repeat(var(--grid-columns),var(--grid-width-columns));
   column-gap: var(--grid-column-gap);
-  margin: 120px 0 60px;
+  margin: 120px 0 0;
 }
 
 .prop-category-bar {
@@ -93,7 +111,7 @@
   border-radius: 20px;  
 }
 
-.category-button:hover, .category-button-selected{
+.category-button:hover, .category-button.selected{
   color: var(--color-theme3);
   background-color: var(--color-theme1);
   border: 1px solid var(--color-theme3);
@@ -105,15 +123,28 @@
   text-overflow: ellipsis;
 }
 
-#category-button-leg:hover img{
+#category-button-leg:hover img, #category-button-leg.selected img{
   content: url("../assets/LegislativasSelect.svg");
 }
 
-#category-button-req-comun:hover img {
+#category-button-req-comun:hover img, #category-button-req-comun.selected img{
   content: url("../assets/ReqSelect.svg");
 }
 
-#category-button-docs:hover img{
+#category-button-docs:hover img,#category-button-docs.selected img{
   content: url("../assets/DocumentsSelect.svg");
 }
 
+
+@media (max-width:850px){
+  .prop-category-bar {
+    box-sizing: border-box;
+    flex-wrap: wrap;
+
+  }
+  .prop-nav-bar {
+    display: flex;
+    align-items: start;
+    margin: 120px 30px;
+  }
+}

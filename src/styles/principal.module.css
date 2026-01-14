@@ -34,6 +34,7 @@
 
 .principal-apresentacao-buttons {
     display: flex;
+    
     gap: 30px;
 }
 
@@ -43,11 +44,58 @@
     padding: 10px 20px;
     color: var(--color-theme1);
     background-color: var(--color-theme3);
+    border-radius: 10px;
+    text-align: center;
 }
 
+.principal-apresentacao-button-deputados {
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 20px;
+  color: var(--color-theme3);
+  background: transparent;
+  border: 2px solid var(--color-theme3);
+  text-align: center;
+  border-radius: 10px;
+}
 
 .principal-secao h4 {
     grid-column: 1 / -1;
     margin: 0 0 30px 0;
 }
 
+
+
+@media (max-width:850px) {
+  .principal-apresentacao-grid { 
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 30px;
+  }
+
+  .principal-apresentacao {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .principal-apresentacao p {
+    max-width: 50dvw;
+  }
+  
+  
+}
+
+@media (max-width:480px) {
+  
+  .principal-apresentacao-buttons {
+    flex-direction: column;
+    gap: 15px;
+}
+  .principal-apresentacao-grid { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+  }
+}

@@ -2,6 +2,7 @@ import PartidosAPI from "../../apis/partidosAPI"
 import { useEffect,useState } from "react"
 import Loading from "@/components/Loading";
 import CardPartido from "./card-partido";
+import { useSearchParams } from "react-router-dom";
 
 export default function Partidos(){
     const partidosAPI = new PartidosAPI();
@@ -9,24 +10,27 @@ export default function Partidos(){
 
     useEffect(()=>{
         async function loadPartidos(){
-            const response = await partidosAPI.getPartidos();
-            setPartidos(response);
+            const data = await partidosAPI.getPartidos();
+            setPartidos(data);
         }
-        loadPartidos();
+        loadPartidos()
     },[])
 
-    return (
-        <>
-            {Array.isArray(partidos) && partidos.length > 0 ? (
-                <div className="card-container margin-top">
-                   {partidos.map((element,index)=> (
-                        <CardPartido key={`${element.id}-${index}`} data={element}/>
-                    )) }
-                </div>
-                )
-                :
-                (<Loading/>)
-            }
-        </>
+    return ( 
+    <>
+    
+    <div className="grid">
+        {Array.isArray(partidos) && partidos.length > 0 ? (
+            <div className="card-container margin-top">
+                {partidos.map((element,index)=> (
+                    <CardPartido key={`${element.id}-${index}`} data={element}/>
+                )) }
+            </div>
+            )
+            :
+            (<Loading/>)
+        }
+    </div>
+    </> 
     )
 };
