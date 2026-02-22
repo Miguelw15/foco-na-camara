@@ -14,7 +14,6 @@ export default function Proposicao(){
     const PropApi = new ProposicoesAPI();
 
     useEffect(()=>{
-        const controller = new AbortController();
 
         async function loadData(){
             try { 
@@ -25,14 +24,16 @@ export default function Proposicao(){
                         PropApi.getPropsRelated(id)
                     ]
                 )   
-
+                
                 const relatedDetails = await Promise.all(
                     related.dados.map(async element=>{
                         const detail = await PropApi.getProp(element.id);
-                        return detail.dados;
+                        return detail;
                     })
                 )
-                setProp(p.dados);
+
+
+                setProp(p);
                 setPropAuthor(authors.dados);
                 setPropRelated(relatedDetails);
                 }
@@ -44,6 +45,7 @@ export default function Proposicao(){
         }
         loadData()
     },[id]);
+
     return (
         <>
         { prop && propAuthor && propRelated ? 
@@ -91,7 +93,7 @@ export default function Proposicao(){
                             ))}
                         </div>
                     </div>  
-                        : null
+                        :   null
                     }
                    
                     

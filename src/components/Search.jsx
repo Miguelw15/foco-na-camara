@@ -1,5 +1,5 @@
 import { useState,useRef,useEffect } from "react";
-import searchIcon from "@/assets/Search.png";
+import searchIcon from "@/assets/Search.svg";
 import { useNavigate } from "react-router-dom";
 
 export default function Search(){
@@ -16,7 +16,7 @@ export default function Search(){
         <div className="search-container">
             
             <div ref={searchRef} className="search">
-                <input list="options" onFocus={()=>{
+                <input id="options" list="options" onFocus={()=>{
                     if (text.length > 0){
                         searchOptionsRef.current.style.display = "flex"
                         searchOptionsRef.current.style.zIndex = "6"
@@ -44,10 +44,8 @@ export default function Search(){
                     
                 }} className="search-text" type="text"/>
 
-                <div className="search-submit-icon"><img src={searchIcon} alt="Icon" /></div>
-                <input className="search-submit" onClick={()=>{
-
-                }} type="submit" value="PESQUISAR"/>
+                <span className="search-submit-icon"><img src={searchIcon} alt="Icon" /></span>
+                
             </div>
             <div ref={searchOptionsRef} className="search-options">
                 <div 

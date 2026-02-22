@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function CardDeputado({data}){
     const navigate = useNavigate();
-
+    
     return (
 
     <div className={style['card-deputado-container']}>
@@ -12,7 +12,6 @@ export default function CardDeputado({data}){
             <div className={style['card-deputado-apresentacao']}>
                 <h3>{data?.nome}</h3>
                 <p>{data?.siglaPartido}</p>
-                <p>{data?.email}</p>
             </div>
         </div>
         <div className='view-more' onClick={()=>

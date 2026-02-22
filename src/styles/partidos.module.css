@@ -85,9 +85,10 @@
 }
 
 
-@media (max-width:850px) {
+@media (max-width:900px) {
     .partido-descricao-container {
         display: flex;
+        box-sizing: border-box;
         flex-direction: column;
         align-items: start;
         justify-content: start;

@@ -3,16 +3,8 @@ import { API_URL } from "@/../config.js";
 
 export default class ProposicoesAPI{
 
-    __setupController(){
-        if (this.controller) {
-            this.controller.abort();
-        }
-        this.controller = new AbortController();
-        this.signal = this.controller.signal;
-    }
     async getPropsFromKeyword(keyword) {
         try {
-            this.__setupController();
             const getProps = await fetch(`${API_URL}/proposicoes?keywords=${keyword}`);
             if (!getProps.ok) throw new Error("Erro na requisição de proposições com palavra chave");
 
@@ -25,12 +17,11 @@ export default class ProposicoesAPI{
     }
     async getPropsRelated(idProposicao, qtd=10){
         try {
-            this.__setupController();
-            const getProps = await fetch(`${API_URL}/proposicoes/${idProposicao}/relacionadas`,{signal:this.signal});
+
+            const getProps = await fetch(`${API_URL}/proposicoes/${idProposicao}/relacionadas`);
             if (!getProps.ok) throw new Error('Erro na requisição de proposições relacionadas');
 
             const props = await getProps.json();
-
             props.dados = props.dados.slice(0,qtd)
             
             return props;
@@ -46,9 +37,8 @@ export default class ProposicoesAPI{
 
             
             const query = typeProps.map(t => `siglaTipo=${t}`).join("&");
-            this.__setupController();
             const url = `${API_URL}/proposicoes?${query}&ordenarPor=ano&ordem=DESC${quantidadeDeProps ? `&itens=${quantidadeDeProps}` : ''}${dataInicio ? `&dataInicio=${dataInicio}` : ''}${dataFim ? `&dataFim=${dataFim}` : ''}`;
-            const getProps = await fetch(url,{signal:this.signal});
+            const getProps = await fetch(url);
             
             if (!getProps.ok) throw new Error('Erro na requisição das proposições');
 
@@ -72,8 +62,7 @@ export default class ProposicoesAPI{
 
     async getTemas(idProposicao){
         try {
-            this.__setupController();
-            const themeResponse = await fetch(`${API_URL}/proposicoes/${idProposicao}/temas`,{signal:this.signal});
+            const themeResponse = await fetch(`${API_URL}/proposicoes/${idProposicao}/temas`);
             
             if (!themeResponse.ok) throw new Error('Erro na requisição do tema');
 
@@ -108,8 +97,7 @@ export default class ProposicoesAPI{
             if (!propResponse.ok) throw new Error('Erro na requisição da proposição');
 
             const propJson = await propResponse.json();
-
-            return propJson;
+            return propJson.dados;
         }
         catch(error){
             console.error(error.message,idProposicao);
@@ -118,7 +106,6 @@ export default class ProposicoesAPI{
 
     async getState(idProposicao){
         try {
-            this.__setupController();
             const tramResponse = await fetch(`${API_URL}/proposicoes/${idProposicao}/tramitacoes`,{signal:this.signal});
             if (!tramResponse.ok) throw new Error('Erro na requisição do estado de tramitação');
 

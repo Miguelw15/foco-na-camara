@@ -91,6 +91,7 @@ body {
 }
 
 header {
+  position: relative;
   overflow: visible;
   display: grid;
   align-items: center;
@@ -244,46 +245,30 @@ footer p {
   background-color: var(--color-theme7);
 }
 
-.search {
-  display: flex;
-}
 
-.search-submit{
-  background-color: var(--color-theme2);
-  color: var(--color-theme3);
-  height: max-content;
-  width: max-content;
-  padding: 8px 16px;
-  border-radius: 0 5px 5px 0;
-}
 
 .search-text{
-  border-radius: 5px 0 0 5px;
+  
+  border-radius: 5px;
   outline: none;
-  padding: 5px;
+  padding: 5px 40px 5px 5px;
+  height: 25px;
   background-color: var(--color-theme3);
 }
 
-.search-submit:hover {
-  filter: brightness(85%);
-
-}
 .search-submit-icon {
-  display: none;
-  background-color: var(--color-theme2);
-  padding: 5px;
-  border-radius: 0 5px 5px 0;
-}
-
-.search-submit-icon:hover {
-  cursor: pointer;
-  filter: brightness(85%);
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
 }
 
 .search-submit-icon img {
   width: 25px;
   height: 25px;
 }
+
+
 
 
 .grid {
@@ -342,7 +327,7 @@ footer p {
   transition: transform .2s linear;
   width: 300px;
   height: 100%;
-  margin-top: 70px;
+  margin-top: 65px;
   background-color: var(--color-theme1);
 }
 
@@ -372,11 +357,9 @@ footer p {
 
 
 
-@media (max-width:850px) {
+@media (max-width:900px) {
 
-  :root {
-    --grid-columns: 8;
-  }
+  
 
   .grid {
     display: flex;
@@ -396,15 +379,12 @@ footer p {
   header {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     column-gap: 0;
-    padding: 0 0 0 30px;
+    padding: 0 30px
   }
   
-  .search-container {
-    position: absolute;
-    right: 30px;
-  }
+  
 
   .search-text {
     width: 15dvw;
@@ -444,11 +424,4 @@ footer p {
 
   }
   
-}
-
-@media (prefers-color-scheme: dark) {
-}
-
-@media (prefers-color-scheme: light) {
-
 }

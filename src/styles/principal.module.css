@@ -10,6 +10,7 @@
     display: grid;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
     grid-template-columns: repeat(var(--grid-columns),var(--grid-width-columns));
     column-gap: var(--grid-column-gap);
     color: var(--color-theme3);
@@ -66,7 +67,7 @@
 
 
 
-@media (max-width:850px) {
+@media (max-width:900px) {
   .principal-apresentacao-grid { 
     display: flex;
     align-items: center;
@@ -77,10 +78,13 @@
   .principal-apresentacao {
     display: flex;
     flex-direction: column;
+
   }
 
+ 
   .principal-apresentacao p {
-    max-width: 50dvw;
+    max-width: 70dvw;
+    font-size: .9rem;
   }
   
   

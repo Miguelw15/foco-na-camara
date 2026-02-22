@@ -20,7 +20,7 @@ export default function Partido(){
     const [partidoData,setPartidoData] = useState();
     const [membros, setMembros] = useState();
     const [currentPage, setCurrentPage] = useState(0);
-
+    const maxPages = 5
     useEffect(()=>{
         async function loadData(){
             const data = await partidosAPI.getPartido(id);
@@ -47,7 +47,7 @@ export default function Partido(){
 
     },[partidoData])
 
-
+    console.log(currentPage)
     return (
         <>
             {partidoData && membros ? (
@@ -97,19 +97,29 @@ export default function Partido(){
                     <div className={style["members-container"]}>
                         <h2>Membros:</h2> 
                         <div className={style["members-page"]}>
-                            <span>Paginas:</span>
-                            <div style={{display:"flex",gap: "10px"}}>
-                                {membros.map((_,i)=>{
-                                    return <div key={i} style={{cursor:"pointer",width: "max-content"}} onMouseDown={(_)=>{console.log( "clicou",currentPage); setCurrentPage(i)}}>{currentPage == i ? <strong>{`[${i+1}]`}</strong> : i+1}</div>
-                                })}
-                            </div>
+                            <span>Páginas:</span>
+                            {
+                                currentPage !== null ?
+                                    <div style={{display:"flex",gap: "10px"}}>
+                                    {membros.map((_,i)=>(
+                                        <>
+                                        {Math.abs(currentPage - i) <= 1 ? (<div key={i} 
+                                            style={{cursor:"pointer",width: "max-content"}} onClick={(_)=>{setCurrentPage(i)}}>{currentPage == i ? <strong>{`[${i+1}]`}</strong> : i+1}</div>
+                                        ) : null
+                                        }
+                                        </>
+                                ))}
+                                </div>
+                                : ""
+                            }
+                            
                             
                         </div>
                     </div>
                     <div className="card-container">
                         
                     {membros[currentPage].map((e,i)=>(
-                           <CardDeputado key={i} data={e}/> 
+                        <CardDeputado key={i} data={e}/> 
                     ))}
 
                     </div>

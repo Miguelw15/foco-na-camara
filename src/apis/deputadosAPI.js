@@ -20,12 +20,10 @@ export default class DeputadosAPI{
 
     async getDeputado(id){
         try {
-
             const response = await fetch(`${API_URL}/deputados/${id}`);
             if (!response.ok) throw new Error('Erro na requisição do deputado');
-
+            
             const data = await response.json();
-
             return data.dados;
         }
         catch(error){

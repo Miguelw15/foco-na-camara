@@ -30,7 +30,7 @@ export default function Principal(){
             const getFullProps = await Promise.all(
                 props.map(async e=>{
                     const details = await proposicoesAPI.getProp(e.dados.id);
-                    return details.dados;
+                    return details;
                 })
             )
 

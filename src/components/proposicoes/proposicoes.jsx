@@ -43,10 +43,10 @@ export default function Proposicoes({numeroDeVotacoes=6}){
 
       const fullProps = await Promise.all(
         baseProps.map(p =>
-          propAPI.getProp(p.id ?? p.dados.id).then(r => r.dados)
-        )
+          
+          propAPI.getProp(p?.dados?.id ?? p?.id).then(r=> {return r}))
+        
       );
-
 
       if (active) {
         setProps(fullProps);
