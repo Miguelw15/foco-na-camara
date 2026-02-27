@@ -27,12 +27,15 @@
 }
 
 .prop-details-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 120px;
-  padding: 0 30px;
+    overflow: visible;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), var(--grid-width-columns));
+    column-gap: var(--grid-column-gap);
+    width: 100%;
+    margin-top: 60px;
+    box-sizing: border-box;
 }
 
 .prop-information-container {
@@ -145,5 +148,9 @@
     display: flex;
     align-items: start;
     margin: 120px 30px;
+  }
+  .prop-details-container {
+    display: flex;
+    padding: 0 30px;
   }
 }
